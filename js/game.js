@@ -40,8 +40,39 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("startGameBtn").addEventListener("click", startGame);
 
   document.getElementById("nextRoundBtn").addEventListener("click", nextRound);
+
+  document
+    .getElementById("invalidateRoundBtn")
+    .addEventListener("click", invalidateRound);
 });
 
+async function invalidateRound() {
+  const { value: reason } = await Swal.fire({
+    title: "Why invalidate?",
+    input: "select",
+    inputOptions: {
+      seen: "Someone saw a card",
+      wrong: "Wrong card selected",
+      dispute: "Player dispute",
+      other: "Other",
+    },
+    showCancelButton: true,
+  });
+
+  if (!reason) return;
+
+  console.log("Round invalidated:", reason);
+
+  document.getElementById("rajaAnnouncement").classList.add("hidden");
+
+  document.getElementById("guessSection").classList.add("hidden");
+
+  startingPlayer = (startingPlayer + 1) % 4;
+
+  round++;
+
+  nextRound();
+}
 // =========================
 // HELPERS
 // =========================
@@ -171,6 +202,10 @@ async function nextRound() {
     taken: false,
   }));
 
+  document
+    .querySelectorAll(".player-card")
+    .forEach((card) => card.classList.remove("active-player"));
+
   document.getElementById("resultSection").classList.add("hidden");
 
   document.getElementById("nextRoundBtn").classList.add("hidden");
@@ -228,8 +263,23 @@ function updateTurnMessage() {
 
   document.getElementById("turnMessage").textContent =
     `${players[playerIndex]} - Choose a Card`;
+
+  highlightActivePlayer();
 }
 
+function highlightActivePlayer() {
+  document
+    .querySelectorAll(".player-card")
+    .forEach((card) => card.classList.remove("active-player"));
+
+  if (currentPlayer >= 4) return;
+
+  const playerIndex = pickOrder[currentPlayer];
+
+  document
+    .getElementById(`playerCard${playerIndex}`)
+    .classList.add("active-player");
+}
 // =========================
 // PICK CARD
 // =========================
@@ -309,6 +359,10 @@ function revealRoles() {
   document.getElementById("cardsBoard").classList.add("hidden");
 
   document.getElementById("rajaAnnouncement").classList.remove("hidden");
+
+  document
+    .querySelectorAll(".player-card")
+    .forEach((card) => card.classList.remove("active-player"));
 
   showGuessButtons();
 }
