@@ -1,0 +1,526 @@
+:root {
+  --gold: #d4af37;
+  --gold-light: #f5d76e;
+  --gold-dark: #b08d2b;
+
+  --bg: #0f172a;
+  --surface: #1f2937;
+  --surface-light: #334155;
+
+  --border: #475569;
+
+  --text: #ffffff;
+  --muted: #94a3b8;
+
+  --radius: 18px;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: linear-gradient(180deg, #0f172a, #111827);
+
+  color: var(--text);
+
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+/* =====================
+   HEADER
+===================== */
+
+.app-header {
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 25px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.game-title {
+  color: var(--gold);
+  font-size: 2rem;
+}
+
+.round-info {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+/* =====================
+   GENERAL
+===================== */
+
+.hidden {
+  display: none !important;
+}
+
+.screen {
+  width: 100%;
+  height: calc(100vh - 70px);
+}
+
+/* =====================
+   SETUP SCREEN
+===================== */
+
+#setupScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.setup-card {
+  width: 650px;
+
+  background: var(--surface);
+
+  border: 2px solid var(--border);
+
+  border-radius: 24px;
+
+  padding: 30px;
+
+  box-shadow: var(--shadow);
+}
+
+.setup-card h2 {
+  text-align: center;
+  color: var(--gold);
+  margin-bottom: 25px;
+}
+
+.player-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.player-inputs input {
+  height: 50px;
+
+  border: 2px solid var(--border);
+
+  border-radius: 12px;
+
+  background: var(--surface-light);
+
+  color: white;
+
+  padding: 0 15px;
+
+  font-size: 1rem;
+}
+
+.player-inputs input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+#startGameBtn {
+  display: block;
+  margin: 25px auto 0;
+}
+
+/* =====================
+   BUTTONS
+===================== */
+
+button {
+  border: none;
+
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+
+  color: #000;
+
+  font-weight: bold;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  padding: 12px 24px;
+
+  transition: 0.25s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+/* =====================
+   GAME LAYOUT
+===================== */
+
+.game-layout {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+}
+
+/* =====================
+   PLAYER CARDS
+===================== */
+
+.corner {
+  position: absolute;
+
+  width: 170px;
+
+  background: var(--surface);
+
+  border: 2px solid var(--border);
+
+  border-radius: 16px;
+
+  padding: 12px;
+
+  text-align: center;
+
+  box-shadow: var(--shadow);
+
+  z-index: 5;
+}
+
+.top-left {
+  top: 15px;
+  left: 15px;
+}
+
+.top-right {
+  top: 15px;
+  right: 15px;
+}
+
+.bottom-left {
+  bottom: 15px;
+  left: 15px;
+}
+
+.bottom-right {
+  bottom: 15px;
+  right: 15px;
+}
+
+.player-rank {
+  display: inline-block;
+
+  padding: 4px 10px;
+
+  border-radius: 20px;
+
+  font-size: 0.75rem;
+
+  font-weight: bold;
+
+  margin-bottom: 8px;
+}
+
+/* First */
+.rank-1 {
+  background: #ffd700;
+  color: #000;
+}
+
+/* Second */
+.rank-2 {
+  background: #c0c0c0;
+  color: #000;
+}
+
+/* Third */
+.rank-3 {
+  background: #cd7f32;
+  color: #fff;
+}
+
+/* Fourth */
+.rank-4 {
+  background: #475569;
+  color: #fff;
+}
+
+.leader {
+  border-color: #ffd700 !important;
+
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.player-avatar {
+  font-size: 1.8rem;
+}
+
+.player-name {
+  margin-top: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player-role {
+  margin-top: 8px;
+  font-size: 2rem;
+}
+
+.player-score {
+  margin-top: 8px;
+  color: var(--gold);
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* =====================
+   CENTER BOARD
+===================== */
+
+.center-board {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 15px;
+}
+
+.center-board.choose {
+  top: 25%;
+}
+/* =====================
+   TURN MESSAGE
+===================== */
+
+#turnMessage {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  text-align: center;
+}
+
+/* =====================
+   CARD BOARD
+===================== */
+
+.cards-board {
+  width: 420px;
+  height: 420px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+
+  gap: 18px;
+}
+
+.game-card {
+  background: linear-gradient(135deg, #334155, #1e293b);
+
+  border: 3px solid var(--gold-dark);
+
+  border-radius: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 5rem;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+
+  user-select: none;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+  border-color: var(--gold);
+}
+
+.game-card.used {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* =====================
+   ANNOUNCEMENT
+===================== */
+
+.announcement {
+  width: 420px;
+}
+
+.announcement-card {
+  background: var(--surface);
+
+  border: 2px solid var(--gold);
+
+  border-radius: 18px;
+
+  padding: 15px;
+
+  text-align: center;
+}
+
+.announcement-card h2 {
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.announcement-card p {
+  line-height: 1.6;
+}
+
+/* =====================
+   GUESS SECTION
+===================== */
+
+.guess-section {
+  text-align: center;
+}
+
+.guess-section h2 {
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+#guessButtons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* =====================
+   RESULT
+===================== */
+
+.result-section {
+  width: 420px;
+}
+
+#resultContent {
+  background: var(--surface);
+
+  border: 2px solid var(--border);
+
+  border-radius: 18px;
+
+  padding: 15px;
+
+  text-align: center;
+}
+
+/* =====================
+   NEXT ROUND
+===================== */
+
+#nextRoundBtn {
+  margin-top: 10px;
+}
+
+/* =====================
+   FOOTER
+===================== */
+
+.app-footer {
+  display: none;
+}
+
+/* =====================
+   SWEETALERT2
+===================== */
+
+.swal2-popup {
+  background: var(--surface) !important;
+  color: white !important;
+  border-radius: 20px !important;
+}
+
+.swal2-title {
+  color: var(--gold) !important;
+}
+
+.swal2-confirm {
+  background: var(--gold) !important;
+  color: #000 !important;
+  font-weight: bold !important;
+}
+
+/* =====================
+   TABLET
+===================== */
+
+@media (max-width: 1024px) {
+  .corner {
+    width: 140px;
+    padding: 10px;
+  }
+
+  .player-name {
+    font-size: 0.9rem;
+  }
+
+  .player-role {
+    font-size: 1.6rem;
+  }
+
+  .cards-board {
+    width: 250px;
+    height: 250px;
+  }
+
+  .game-card {
+    font-size: 4rem;
+  }
+
+  .announcement,
+  .result-section {
+    width: 320px;
+  }
+}
+
+/* =====================
+   SMALL TABLETS
+===================== */
+
+@media (max-height: 700px) {
+  .cards-board {
+    width: 280px;
+    height: 280px;
+  }
+
+  .game-card {
+    font-size: 3.5rem;
+  }
+
+  .corner {
+    width: 130px;
+  }
+}

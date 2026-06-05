@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>👑 Chor Sipahi</title>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="app-header">
+      <h1 class="game-title">👑 Chor Sipahi 🛡️</h1>
+
+      <div class="round-info">🎴 Round <span id="roundNumber">1</span></div>
+    </header>
+
+    <!-- SETUP SCREEN -->
+    <section id="setupScreen" class="screen">
+      <div class="setup-card">
+        <h2>Players Setup</h2>
+
+        <div class="player-inputs">
+          <input type="text" id="player1" placeholder="Player 1 Name" />
+
+          <input type="text" id="player2" placeholder="Player 2 Name" />
+
+          <input type="text" id="player3" placeholder="Player 3 Name" />
+
+          <input type="text" id="player4" placeholder="Player 4 Name" />
+        </div>
+
+        <button id="startGameBtn">Start Game</button>
+      </div>
+    </section>
+
+    <!-- GAME SCREEN -->
+    <!-- GAME SCREEN -->
+    <section id="gameScreen" class="screen hidden">
+      <div class="game-layout">
+        <!-- PLAYER 1 -->
+        <div class="player-card corner top-left" id="playerCard0">
+          <div class="player-rank" id="playerRank0">nth</div>
+          <div class="player-avatar">👤</div>
+
+          <div class="player-name" id="playerName0">Player 1</div>
+
+          <div class="player-role" id="playerRole0">❔</div>
+
+          <div class="player-score" id="playerScore0">0 pts</div>
+        </div>
+
+        <!-- PLAYER 2 -->
+        <div class="player-card corner top-right" id="playerCard1">
+          <div class="player-rank" id="playerRank1">nth</div>
+
+          <div class="player-avatar">👤</div>
+
+          <div class="player-name" id="playerName1">Player 2</div>
+
+          <div class="player-role" id="playerRole1">❔</div>
+
+          <div class="player-score" id="playerScore1">0 pts</div>
+        </div>
+
+        <!-- PLAYER 3 -->
+        <div class="player-card corner bottom-left" id="playerCard2">
+          <div class="player-rank" id="playerRank2">nth</div>
+          <div class="player-avatar">👤</div>
+
+          <div class="player-name" id="playerName2">Player 3</div>
+
+          <div class="player-role" id="playerRole2">❔</div>
+
+          <div class="player-score" id="playerScore2">0 pts</div>
+        </div>
+
+        <!-- PLAYER 4 -->
+        <div class="player-card corner bottom-right" id="playerCard3">
+          <div class="player-rank" id="playerRank3">nth</div>
+          <div class="player-avatar">👤</div>
+
+          <div class="player-name" id="playerName3">Player 4</div>
+
+          <div class="player-role" id="playerRole3">❔</div>
+
+          <div class="player-score" id="playerScore3">0 pts</div>
+        </div>
+
+        <!-- CENTER GAME AREA -->
+        <div class="center-board">
+          <!-- CURRENT TURN -->
+          <div id="turnMessage">Waiting...</div>
+
+          <!-- CARD BOARD -->
+          <div id="cardsBoard" class="cards-board">
+            <!-- JS generates cards here -->
+          </div>
+
+          <!-- RAJA MESSAGE -->
+          <div id="rajaAnnouncement" class="announcement hidden">
+            <div class="announcement-card">
+              <h2>👑 Raja Says</h2>
+
+              <p>
+                Sipahi Sipahi Chor Ko Pakdo,
+                <br />
+                Mantri Apna Kaam Kare!
+              </p>
+            </div>
+          </div>
+
+          <!-- GUESS SECTION -->
+          <div id="guessSection" class="guess-section hidden">
+            <h2>🛡️ Sipahi, Find The Chor</h2>
+
+            <div id="guessButtons"></div>
+          </div>
+
+          <!-- ROUND RESULT -->
+          <div id="resultSection" class="result-section hidden">
+            <div id="resultContent"></div>
+          </div>
+
+          <!-- NEXT ROUND -->
+          <button id="nextRoundBtn" class="hidden">🔄 Next Round</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="app-footer">
+      <div>Chor Sipahi Game</div>
+    </footer>
+
+    <!-- JS -->
+    <script src="js/game.js"></script>
+  </body>
+</html>
