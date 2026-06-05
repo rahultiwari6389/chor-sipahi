@@ -158,6 +158,12 @@ function getOrdinal(num) {
 async function nextRound() {
   assignedRoles = [];
 
+  pickOrder = [];
+
+  for (let i = 0; i < 4; i++) {
+    pickOrder.push((startingPlayer + i) % 4);
+  }
+
   currentPlayer = 0;
 
   cards = shuffle(ROLES).map((role) => ({
@@ -218,16 +224,22 @@ function createBoard() {
 // =========================
 
 function updateTurnMessage() {
+  const playerIndex = pickOrder[currentPlayer];
+
   document.getElementById("turnMessage").textContent =
-    `${players[currentPlayer]} - Choose a Card`;
+    `${players[playerIndex]} - Choose a Card`;
 }
 
 // =========================
 // PICK CARD
 // =========================
+let startingPlayer = 0;
+let pickOrder = [];
 
 async function pickCard(cardIndex) {
   if (currentPlayer >= 4) return;
+
+  const playerIndex = pickOrder[currentPlayer];
 
   const card = cards[cardIndex];
 
@@ -235,12 +247,12 @@ async function pickCard(cardIndex) {
 
   card.taken = true;
 
-  assignedRoles[currentPlayer] = card.role;
+  assignedRoles[playerIndex] = card.role;
 
   document.querySelectorAll(".game-card")[cardIndex].classList.add("used");
 
   await Swal.fire({
-    title: players[currentPlayer],
+    title: players[playerIndex],
     html: `
             <div style="font-size:100px">
                 ${getRoleIcon(card.role)}
@@ -254,12 +266,14 @@ async function pickCard(cardIndex) {
   currentPlayer++;
 
   if (currentPlayer < 4) {
+    const nextPlayer = pickOrder[currentPlayer];
+
     await Swal.fire({
       title: "📱 Pass Tablet",
       html: `
                 Give tablet to
                 <br><br>
-                <b>${players[currentPlayer]}</b>
+                <b>${players[nextPlayer]}</b>
             `,
       confirmButtonText: "Ready",
       allowOutsideClick: false,
@@ -384,4 +398,6 @@ function showRoundResult(finalRoles) {
   document.getElementById("nextRoundBtn").classList.remove("hidden");
 
   round++;
+
+  startingPlayer = (startingPlayer + 1) % 4;
 }
